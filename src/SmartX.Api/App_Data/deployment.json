@@ -1,0 +1,37 @@
+{
+  "root": {
+    "id": "facility-a",
+    "name": "Facility A",
+    "kind": "Facility",
+    "enabled": true,
+    "sensorId": null,
+    "children": [
+      {
+        "id": "zone-1",
+        "name": "Zone 1",
+        "kind": "Zone",
+        "enabled": true,
+        "sensorId": null,
+        "children": [
+          {
+            "id": "sub-zone-b",
+            "name": "Sub-Zone B",
+            "kind": "SubZone",
+            "enabled": true,
+            "sensorId": null,
+            "children": [
+              {
+                "id": "device-1",
+                "name": "DEMO-TEMP-001",
+                "kind": "Device",
+                "enabled": true,
+                "sensorId": "77513251-23d5-440d-bdd1-9c095e50b0ac",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

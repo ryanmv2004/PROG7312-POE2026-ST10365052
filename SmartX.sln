@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.12009.203 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartX.Api", "src\SmartX.Api\SmartX.Api.csproj", "{4AE51AC2-561C-40D2-80DB-94CB1F63CE73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AE51AC2-561C-40D2-80DB-94CB1F63CE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AE51AC2-561C-40D2-80DB-94CB1F63CE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AE51AC2-561C-40D2-80DB-94CB1F63CE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AE51AC2-561C-40D2-80DB-94CB1F63CE73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {621C62A9-2032-48F8-81E5-0AC32279E915}
+	EndGlobalSection
+EndGlobal
