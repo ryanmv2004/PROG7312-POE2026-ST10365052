@@ -3,6 +3,7 @@ using SmartX.Api.Models;
 
 namespace SmartX.Api.Services;
 
+// Small single-process gateway store
 public sealed class SensorRepository
 {
     private readonly object gate = new();

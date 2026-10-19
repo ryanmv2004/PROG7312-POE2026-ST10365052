@@ -2,6 +2,7 @@ using SmartX.Api.Models;
 
 namespace SmartX.Api.Services;
 
+// Each sensor has a bounded typed queue
 public sealed class TelemetryBuffer<T>(int capacity) where T : struct
 {
     private readonly object gate = new();

@@ -1,9 +1,8 @@
 @baseUrl = http://localhost:5080
-
 @timestampUtc = REPLACE_WITH_CURRENT_UTC_TIME
-
 @sensorId = 00000000-0000-0000-0000-000000000000
 
+### Gateway health
 GET {{baseUrl}}/api/health
 
 ### Register a temperature sensor
@@ -24,7 +23,7 @@ X-SmartX-Client: dashboard
 ### List all registered sensors with health status
 GET {{baseUrl}}/api/sensors
 
-### Submit float telemetry data
+### Submit float telemetry
 POST {{baseUrl}}/api/sensors/{{sensorId}}/telemetry/temperature
 Content-Type: application/json
 X-SmartX-Client: dashboard
@@ -38,7 +37,7 @@ X-SmartX-Client: dashboard
 ### Retrieve typed readings
 GET {{baseUrl}}/api/sensors/{{sensorId}}/telemetry/temperature
 
-### Wrongly typed payload
+### Wrongly typed payloads
 POST {{baseUrl}}/api/sensors/{{sensorId}}/telemetry/temperature
 Content-Type: application/json
 X-SmartX-Client: dashboard

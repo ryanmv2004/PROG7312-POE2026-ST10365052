@@ -17,7 +17,6 @@ public static class AdvancedEndpoints
         api.MapPost("/sensors/{id:guid}/telemetry/switch/batches",
             (Guid id, HistoricalBatchRequest<bool> request, HistoricalBatchService service) => Results.Ok(service.Ingest(id, request)));
         api.MapGet("/deployment", (DeploymentStore store) => Results.Ok(store.Load()));
-        // Validation is an operation: HTTP 200 contains isValid=false and path-specific errors.
         api.MapPost("/deployment/validate", (DeploymentRequest request, DeploymentValidator validator) =>
             Results.Ok(validator.Validate(request.Root)));
         api.MapPost("/deployment", (DeploymentRequest request, DeploymentStore store) =>

@@ -1,4 +1,5 @@
 namespace SmartX.Api.Models;
+
 public readonly record struct MeterReading(long Watts)
 {
     public static MeterReading operator +(MeterReading left, MeterReading right)

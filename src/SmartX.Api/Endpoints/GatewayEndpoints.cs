@@ -20,11 +20,26 @@ public static class GatewayEndpoints
         });
 
         api.MapPost("/sensors/{id:guid}/telemetry/temperature",
-            (Guid id, TelemetryPacket<float> packet, TelemetryService telemetry) => Results.Ok(telemetry.Ingest(id, packet)));
+            (Guid id, TelemetryPacket<float> packet, TelemetryService telemetry, CommandStreamService commands) =>
+            {
+                var received = telemetry.Ingest(id, packet);
+                commands.ObserveTelemetry(id, received.IsAnomaly);
+                return Results.Ok(received);
+            });
         api.MapPost("/sensors/{id:guid}/telemetry/power",
-            (Guid id, TelemetryPacket<int> packet, TelemetryService telemetry) => Results.Ok(telemetry.Ingest(id, packet)));
+            (Guid id, TelemetryPacket<int> packet, TelemetryService telemetry, CommandStreamService commands) =>
+            {
+                var received = telemetry.Ingest(id, packet);
+                commands.ObserveTelemetry(id, received.IsAnomaly);
+                return Results.Ok(received);
+            });
         api.MapPost("/sensors/{id:guid}/telemetry/switch",
-            (Guid id, TelemetryPacket<bool> packet, TelemetryService telemetry) => Results.Ok(telemetry.Ingest(id, packet)));
+            (Guid id, TelemetryPacket<bool> packet, TelemetryService telemetry, CommandStreamService commands) =>
+            {
+                var received = telemetry.Ingest(id, packet);
+                commands.ObserveTelemetry(id, received.IsAnomaly);
+                return Results.Ok(received);
+            });
         api.MapGet("/sensors/{id:guid}/telemetry/temperature", (Guid id, TelemetryService telemetry) =>
         {
             telemetry.RequireKind(id, ReadingKind.Temperature);

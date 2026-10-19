@@ -32,6 +32,7 @@ public sealed class TelemetryService(SensorRepository sensors, IConfiguration co
     }
 
 
+    // Shared validation:
     public bool Check(Guid id, TelemetryPacket<float> packet)
     {
         var s = Validate(id, packet, ReadingKind.Temperature);

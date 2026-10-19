@@ -4,6 +4,7 @@ import { api, post, readingsPath } from './api.js';
 import { makePacket, simulatedValue } from './telemetry.js';
 import './styles.css';
 import AdvancedFeatures from './AdvancedFeatures.jsx';
+import CommandStream from './CommandStream.jsx';
 
 const labels = { Healthy: 'Healthy', Anomaly: 'Outside range', NoRecentData: 'No recent data', Waiting: 'Awaiting first reading' };
 const categoryNames = { Environmental: 'Environmental', PowerConsumption: 'Power consumption', Actuator: 'Actuator' };
@@ -68,19 +69,19 @@ function App() {
       <div className="eyebrow navlabel">WORKSPACE</div>
       <button className={`nav ${page === 'home' ? 'active' : ''}`} onClick={() => setPage('home')}>◈ <span>Gateway overview</span></button>
       <button className={`nav ${page === 'dashboard' ? 'active' : ''}`} onClick={() => setPage('dashboard')}>⌁ <span>Sensor telemetry</span></button>
-      <button className="nav" disabled>⇄ <span>Command stream <small>PART 2</small></span></button>
+      <button className={`nav ${page === 'commands' ? 'active' : ''}`} onClick={() => setPage('commands')}>⇄ <span>Command stream</span></button>
       <button className="nav" disabled>◇ <span>Mesh routing <small>FINAL POE</small></span></button>
       <div className="sidebar-foot"><span className={`dot ${connected ? 'green' : 'red'}`}/>{loading ? 'Connecting to gateway…' : connected ? 'Gateway connected' : 'Gateway unavailable'}<small>SMART-X / INGESTION GATEWAY</small></div>
     </aside>
-    <main><header><div className="breadcrumb">Workspace <span>/</span> {page === 'home' ? 'Overview' : 'Sensor telemetry'}</div><span className="pill">PART 1 · DATA INGESTION</span></header>
+    <main><header><div className="breadcrumb">Workspace <span>/</span> {page === 'home' ? 'Overview' : page === 'commands' ? 'Command stream & history' : 'Sensor telemetry'}</div><span className="pill">{page === 'commands' ? 'PART 2 · REAL-TIME OPERATIONS' : 'PART 1 · DATA INGESTION'}</span></header>
       <div className="content">
         {!connected && !loading && <div className="message error" role="alert">Cannot reach the API. Start SmartX.Api on port 5080. Displayed readings may be stale. <button onClick={refresh}>Retry</button></div>}
         {error && <div className="message error" role="alert">{error}<button onClick={() => setError('')}>Dismiss</button></div>}
         {notice && <div className="message success" role="status">{notice}</div>}
-        {page === 'home' ? <>
+        {page === 'commands' ? <CommandStream onNotice={setNotice}/> : page === 'home' ? <>
           <div className="hero"><div className="eyebrow">YOUR CONNECTED ECOSYSTEM</div><h1>Every signal.<br/><span>A clearer picture.</span></h1><p>Register devices, follow their readings, and investigate problems from one gateway.</p><div className="actions"><button className="primary" onClick={() => setPage('dashboard')}>Open telemetry dashboard →</button><button disabled={busy || !connected} onClick={demo}>{busy ? 'Preparing demo…' : 'Load demo sensors'}</button></div></div>
           <div className="pillars"><button className="pillar available" onClick={() => setPage('dashboard')}><span className="eyebrow">01 / AVAILABLE</span><div className="pillar-icon">⌁</div><h2>Sensor data ingestion<br/>& telemetry</h2><p>Capture typed readings, monitor sensor health and investigate unusual activity.</p><strong>Open module →</strong></button>
-            <button className="pillar" disabled><span className="eyebrow">02 / PART 2</span><div className="pillar-icon">⇄</div><h2>Real-time command<br/>stream & history</h2><p>Command dispatch and execution history will become available in Part 2.</p><strong>Coming later</strong></button>
+            <button className="pillar available" onClick={() => setPage('commands')}><span className="eyebrow">02 / AVAILABLE · PART 2</span><div className="pillar-icon">⇄</div><h2>Real-time command<br/>stream & history</h2><p>Command dispatch and execution history will become available in Part 2.</p><strong>Open module →</strong></button>
             <button className="pillar" disabled><span className="eyebrow">03 / FINAL POE</span><div className="pillar-icon">◇</div><h2>Network topology<br/>& mesh routing</h2><p>Explore connected nodes and routing in the final POE.</p><strong>Coming later</strong></button></div>
           <div className="onboarding"><b>New to Smart-X?</b><span>1. Register a sensor</span><span>2. Send a reading</span><span>3. Inspect its signal</span></div>
         </> : <>

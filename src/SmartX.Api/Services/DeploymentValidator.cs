@@ -55,9 +55,8 @@ public sealed class DeploymentValidator(SensorRepository sensors)
             }
             else if (node.SensorId is not null) errors.Add(new(path, "Only device nodes may reference a sensor."));
 
-            // Recursive descent carries the full path and inherited safety state.
             foreach (var child in children.Take(100)) Visit(child, node.Kind, path, safelyEnabled, depth + 1);
-            ancestors.Remove(node); // Backtrack after visiting this subtree.
+            ancestors.Remove(node);
         }
         Visit(root, null, "", true, 1);
         if (placements.Count == 0) errors.Add(new("", "Include at least one registered device in the deployment."));

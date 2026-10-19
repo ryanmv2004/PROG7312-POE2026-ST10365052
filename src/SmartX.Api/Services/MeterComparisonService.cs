@@ -15,9 +15,9 @@ public sealed class MeterComparisonService(TelemetryService telemetry)
             throw new GatewayException(409, "Both meters need at least one reading in this server session.");
         MeterReading meterA = new(aPacket.Packet.Value);
         MeterReading meterB = new(bPacket.Packet.Value);
-        MeterReading aggregate = meterA + meterB; 
-        MeterReading delta = meterA - meterB;     
-        bool aExceedsB = meterA > meterB;         
+        MeterReading aggregate = meterA + meterB;
+        MeterReading delta = meterA - meterB;
+        bool aExceedsB = meterA > meterB;     
         var now = DateTimeOffset.UtcNow;
         bool stale = (now - aPacket.ReceivedAtUtc).TotalSeconds > aSensor.DisconnectAfterSeconds
             || (now - bPacket.ReceivedAtUtc).TotalSeconds > bSensor.DisconnectAfterSeconds;

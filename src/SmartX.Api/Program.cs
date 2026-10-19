@@ -25,6 +25,7 @@ builder.Services.AddSingleton<HistoricalBatchService>();
 builder.Services.AddSingleton<MeterComparisonService>();
 builder.Services.AddSingleton<DeploymentValidator>();
 builder.Services.AddSingleton<DeploymentStore>();
+builder.Services.AddSingleton<CommandStreamService>();
 var app = builder.Build();
 app.UseExceptionHandler();
 app.Use(async (context, next) =>
@@ -63,6 +64,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.MapGatewayEndpoints();
 app.MapAdvancedEndpoints();
+app.MapCommandEndpoints();
 app.Map("/api/{**path}", () => Results.NotFound(new { detail = "API endpoint not found." }));
 app.MapFallbackToFile("index.html");
 app.Run();
